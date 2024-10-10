@@ -2,13 +2,14 @@
 #include <fstream>
 #include <vector>
 #include <queue>
+#include <iomanip> // Para setw()
 #include <limits>
 
 using namespace std;
 
 const int INF = numeric_limits<int>::max(); // Definimos INF como infinito
 
-// Implementación del algoritmo de Dijkstra
+// Implementación del algoritmo de Dijkstra como lo tenías
 void dijkstra(const vector<vector<int>>& graph, int start) {
     int n = graph.size();
     vector<int> dist(n, INF); // Distancia mínima inicializada a infinito
@@ -35,15 +36,15 @@ void dijkstra(const vector<vector<int>>& graph, int start) {
         }
     }
 
-    // Imprimimos las distancias desde el nodo `start`
+    // Imprimimos las distancias desde el nodo start
     for (int i = 0; i < n; i++) {
         if (i != start) {
-            cout << "node " << start + 1 << " to node " << i + 1 << " : ";
+            cout << "node " << setw(1) << start + 1 << " to node " << setw(1) << i + 1 << " : ";
             if (dist[i] == INF) {
-                cout << "No path" << endl;
+                cout << setw(3) << "-1" << endl;
             }
             else {
-                cout << dist[i] << endl;
+                cout << setw(3) << dist[i] << endl;
             }
         }
     }
@@ -74,15 +75,16 @@ void floydWarshall(vector<vector<int>>& graph) {
         }
     }
 
-    // Imprimimos la matriz de distancias
-    cout << "Floyd :" << endl;
+    // Imprimimos la matriz de distancias con formato
+    cout << "Floyd-Warshall:\n";
+
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             if (dist[i][j] == INF) {
-                cout << "INF ";
+                cout << setw(4) << "-1";
             }
             else {
-                cout << dist[i][j] << " ";
+                cout << setw(4) << dist[i][j];
             }
         }
         cout << endl;
@@ -119,4 +121,5 @@ int main() {
     floydWarshall(graph);
 
     return 0;
+
 }
